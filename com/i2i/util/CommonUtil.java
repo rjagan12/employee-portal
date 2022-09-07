@@ -1,6 +1,6 @@
 package com.i2i.util;
 
-import org.apache.commons.validator.routines.EmailValidator; 
+import org.apache.commons.validator.routines.EmailValidator;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -72,6 +72,7 @@ public class CommonUtil {
         UUID uniqueId = UUID.randomUUID();
         return uniqueId;
     }
+    
 
     public static boolean validateTrainers(List< Trainer> Trainers) throws NullListException {
         if (Trainers.size() == 0) {

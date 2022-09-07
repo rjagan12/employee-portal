@@ -1,12 +1,13 @@
-package com.i2i.service;
+package com.i2i.service.impl;
 
 import java.util.List;
 
+import com.i2i.dao.EmployeeDao;
+import com.i2i.dao.impl.EmployeeDaoImpl;
 import com.i2i.model.Employee;
-import com.i2i.dao.EmployeeDaoImpl;
 import com.i2i.model.Trainer;
 import com.i2i.model.Trainee;
-
+import com.i2i.service.EmployeeService;
 
 /**
  * <h> EmployeeServiceImpl </h> 
@@ -16,15 +17,16 @@ import com.i2i.model.Trainee;
  * @version 1.0
  * @author Jaganathan R  
  */
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+    private EmployeeDao employeeDao = new EmployeeDaoImpl();
 
     /**
      * Method used to add All trainees Details 
      * @param {@link Trainee}  
      * @return {@link String }return status
      */
+    @Override
     public String addTraineeDetails(Trainee trainee) throws Exception {
 
         return employeeDao.insertTraineeDetails(trainee);
@@ -35,6 +37,7 @@ public class EmployeeServiceImpl {
      * @param {@link noparam}  
      * @return {@link List<Trainee> }return traineeDetails
      */
+    @Override
     public List<Trainee> showAllTraineeDetails() throws Exception {
 
         return employeeDao.retrieveTraineesDetails();
@@ -45,6 +48,7 @@ public class EmployeeServiceImpl {
      * @param {@link String }traineeid 
      * @return {@link String }return status
      */
+    @Override
     public String deleteTraineeDetails(int id) throws Exception {
 
         return employeeDao.removeTraineeDetails(id);
@@ -55,6 +59,7 @@ public class EmployeeServiceImpl {
      * @param {@link String}traineeid  
      * @return {@link Trainee }return traineeDetails
      */
+    @Override
     public Trainee showTraineeDetailsById(int traineeId) throws Exception {
 
         return employeeDao.displayTraineeDetailsById(traineeId);
@@ -65,6 +70,7 @@ public class EmployeeServiceImpl {
      * @param {@link String, Trainee}traineeid, traineeDetails 
      * @return {@link String}return status
      */
+    @Override
     public String modifyTraineeDetailsById(int traineeId, Trainee traineeDetails) throws Exception {
 
         return employeeDao.updateTraineeDetails(traineeId, traineeDetails);
@@ -75,6 +81,7 @@ public class EmployeeServiceImpl {
      * @param {@link Trainer}  
      * @return {@link String }return status
      */
+    @Override
     public String addTrainerDetails(Trainer trainer) throws Exception {
 
         return employeeDao.insertTrainerDetails(trainer);
@@ -85,6 +92,7 @@ public class EmployeeServiceImpl {
      * @param {@link noparam} 
      * @return {@link List<Trainer> }return trainerDetails
      */
+    @Override
     public List<Trainer> showAllTrainerDetails() throws Exception {
 
         return employeeDao.retrieveTrainersDetails();
@@ -95,6 +103,7 @@ public class EmployeeServiceImpl {
      * @param {@link String }trainerid 
      * @return {@link String }return status
      */
+    @Override
     public String deleteTrainerDetails(int id) throws Exception {
 
         return employeeDao.removeTrainerDetails(id);
@@ -105,6 +114,7 @@ public class EmployeeServiceImpl {
      * @param {@link String}trainerid  
      * @return {@link Trainer }return trainerDetails
      */
+    @Override
     public Trainer showTrainerDetailsById(int trainerId) throws Exception {
 
         return employeeDao.displayTrainerDetailsById(trainerId);
@@ -115,6 +125,7 @@ public class EmployeeServiceImpl {
      * @param {@link String, Trainer}trainerid and trainer 
      * @return {@link String}
      */
+    @Override
     public String modifyTrainerDetailsById(int id, Trainer trainerDetails) throws Exception {
 
         return employeeDao.updateTrainerDetails(id, trainerDetails);
@@ -125,6 +136,7 @@ public class EmployeeServiceImpl {
      * @param {@link String, Trainer}traineeid and  trainer 
      * @return {@link }
      */
+    @Override
     public String assignTrainers(int traineeId, Trainee trainee) throws Exception {
 
         return employeeDao.updateTraineeDetails( traineeId, trainee);
@@ -135,6 +147,7 @@ public class EmployeeServiceImpl {
      * @param {@link String, Trainee}traineeid and trainee 
      * @return {@link }
      */
+    @Override
     public String assignTrainees(int trainerId, Trainer trainer) throws Exception {
     
         return employeeDao.updateTrainerDetails( trainerId, trainer);
@@ -145,6 +158,7 @@ public class EmployeeServiceImpl {
      * @param {@link String }trainerid 
      * @return {@link String }return status
      */
+    @Override
     public String removeIdFromAssignedTrainee(int trainersId) throws Exception {
         
 	return employeeDao.removeTrainerDetails(trainersId); 
@@ -154,7 +168,8 @@ public class EmployeeServiceImpl {
      * Method used to remove trainee from trainer 
      * @param {@link String}traineeid 
      * @return {@link String }return status
-     */   
+     */
+    @Override   
     public String removeIdFromAssignedTrainer(int traineesId) throws Exception {
 
 	return employeeDao.removeTraineeDetails(traineesId); 

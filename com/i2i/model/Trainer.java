@@ -27,14 +27,13 @@ public class Trainer extends Employee {
     @Column(name = "experience")
     private int experience;
 
-    @Column(name = "companyname")
+    @Column(name = "company_name")
     private String previousCompanyName;
 
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(name = "trainerid_traineeid",
-               joinColumns = @JoinColumn(name = "trainer_id"),
-               inverseJoinColumns = @JoinColumn(name = "trainee_id"))
-    private List<Trainee> traineeDetails;
+    @JoinTable(name = "trainers_trainees",
+               joinColumns = {@JoinColumn(name = "trainer_id")})
+    private List<Trainee> trainee;
    
     public void setExperience(int experience) {
         this.experience = experience;
@@ -53,11 +52,11 @@ public class Trainer extends Employee {
     }
 
     public List<Trainee> getTraineeDetails() {
-        return traineeDetails;
+        return trainee;
     }
 
-    public void setTraineeDetails(List<Trainee> traineeDetails) {
-        this.traineeDetails = traineeDetails;
+    public void setTraineeDetails(List<Trainee> trainee) {
+        this.trainee = trainee;
     }
        
 }

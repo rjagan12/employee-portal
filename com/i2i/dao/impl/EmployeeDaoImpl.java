@@ -1,9 +1,11 @@
-package com.i2i.dao;
+package com.i2i.dao.impl;
 
 import com.i2i.configure.ConfigureClass;
-import com.i2i.model.Trainer;
+import com.i2i.dao.EmployeeDao;
 import com.i2i.model.Trainee;
-import com.i2i.service.EmployeeServiceImpl;
+import com.i2i.model.Trainer;
+import com.i2i.service.EmployeeService;
+import com.i2i.service.impl.EmployeeServiceImpl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -12,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,13 +24,14 @@ import java.util.List;
  * @version 1.0
  * @author Jaganathan R  
  */
-public class EmployeeDaoImpl {
+public class EmployeeDaoImpl implements EmployeeDao{
 
     /**
      * Method used to add All trainees Details 
      * @param {@link Trainee}  
      * @return {@link String }return status
      */
+    @Override
     public String insertTraineeDetails(Trainee trainee) throws Exception {
 	
 	Transaction transaction = null;
@@ -57,6 +59,7 @@ public class EmployeeDaoImpl {
      * @param {@link Trainer}  
      * @return {@link String }return status
      */
+    @Override
     public String insertTrainerDetails(Trainer trainer) throws Exception {
 	
 	Transaction transaction = null;
@@ -84,6 +87,7 @@ public class EmployeeDaoImpl {
      * @param {@link String}traineeid  
      * @return {@link Trainee }return traineeDetails
      */
+    @Override
     public Trainee displayTraineeDetailsById(int traineeId) throws Exception {
 
         Transaction transaction = null;
@@ -105,6 +109,7 @@ public class EmployeeDaoImpl {
      * @param {@link String}trainerid  
      * @return {@link Trainer }return trainerDetails
      */
+    @Override
     public Trainer displayTrainerDetailsById(int trainerId) throws Exception {
 
         Transaction transaction = null;
@@ -127,12 +132,14 @@ public class EmployeeDaoImpl {
      * @param {@link noparam} 
      * @return {@link List<Trainee> }return traineeDetails
      */
+    @Override
     public List<Trainee> retrieveTraineesDetails() throws Exception {
 
         List<Trainee> trainees = new ArrayList<>(); 
 
-        try(Session session = ConfigureClass.getFactory().openSession();) {
-            trainees = session.createQuery("from Trainee where isDeleted = false").list();
+        try (Session session = ConfigureClass.getFactory().openSession();) {
+            Criteria criteria = session.createCriteria(Trainer.class).add(Restrictions.eq("isDeleted", false));
+            trainers = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
         } catch(HibernateException e) {
 
@@ -147,13 +154,14 @@ public class EmployeeDaoImpl {
      * @param {@link noparam} 
      * @return {@link List<Trainer> }return trainerDetails
      */
+    @Override
     public List<Trainer> retrieveTrainersDetails() throws Exception {
 
         List<Trainer> trainers = new ArrayList<>();
  
-        try(Session session = ConfigureClass.getFactory().openSession();) {
-             trainers = session.createQuery("from Trainer where isDeleted = false").list();
-
+        try (Session session = ConfigureClass.getFactory().openSession();) {
+            Criteria criteria = session.createCriteria(Trainer.class).add(Restrictions.eq("isDeleted", false));
+            trainers = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
         } catch(HibernateException e) {
 
             throw e;
@@ -166,6 +174,7 @@ public class EmployeeDaoImpl {
      * @param {@link String }traineeid 
      * @return {@link String }return status
      */
+    @Override
     public String removeTraineeDetails(int id) throws Exception {
 
         Transaction transaction = null;
@@ -194,6 +203,7 @@ public class EmployeeDaoImpl {
      * @param {@link String }trainerid 
      * @return {@link String }return status
      */
+    @Override
     public String removeTrainerDetails(int id) throws Exception {
 
         Transaction transaction = null;
@@ -223,6 +233,7 @@ public class EmployeeDaoImpl {
      * @param {@link String, Trainee}traineeid, traineeDetails 
      * @return {@link String}return status
      */
+    @Override
     public String updateTraineeDetails(int traineeId, Trainee traineeDetails) throws Exception {
 
         Transaction transaction = null;
@@ -262,6 +273,7 @@ public class EmployeeDaoImpl {
      * @param {@link String, Trainer}trainerid, trainerDetails 
      * @return {@link String}return status
      */
+    @Override
     public String updateTrainerDetails(int trainerId, Trainer trainerDetails) throws Exception {
 
         Transaction transaction = null;

@@ -22,28 +22,28 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "mobilenumber")
+    @Column(name = "mobile_number")
     private long mobileNumber;
 
     @Column(name = "mail")
     private String mail;
 
-    @Column(name = "birthdate")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     @Column(name = "joiningdate")
     private LocalDate dateOfJoin;
 
-    @Column(name = "aadharnumber")
+    @Column(name = "aadhar_number")
     private long aadharNumber;
 
-    @Column(name = "pannumber")
+    @Column(name = "pan_number")
     private String panNumber;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "isDeleted")
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
     @Column(name = "role")
@@ -110,10 +110,6 @@ public class Employee {
 
    public void setDateOfBirth(LocalDate dateOfBirth) {        
        this.dateOfBirth = dateOfBirth;
-   }
-
-   public void setId(int id) {
-       this.id = id;
    }
 
    public void setDateOfJoin(LocalDate dateOfJoin) {

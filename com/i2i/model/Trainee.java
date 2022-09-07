@@ -24,22 +24,24 @@ import javax.persistence.Table;
 @Table(name = "trainees")
 public class Trainee extends Employee {
 
-    @Column(name = "passoutyear")
+    @Column(name = "year_of_passing")
     private LocalDate passOutYear;
 
-    @ManyToMany( fetch = FetchType.EAGER, mappedBy = "trainee_id") 
-    private List<Trainer> trainerDetails;
+    @ManyToMany(targetEntity = Trainer.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "trainers_trainees",
+                joinColumns = {@JoinColumn(name = "trainee_id")}) 
+    private List<Trainer> trainer;
 
     public void setPassOutYear(LocalDate passOutYear) {
         this.passOutYear = passOutYear;
     }
 
-    public void setTrainerDetails(List<Trainer> trainerDetails) {
-        this.trainerDetails = trainerDetails;
+    public void setTrainerDetails(List<Trainer> trainer) {
+        this.trainer = trainer;
     }
 
     public List<Trainer> getTrainerDetails() {
-        return trainerDetails;
+        return trainer;
     }
 
     public LocalDate getPassOutYear() {
