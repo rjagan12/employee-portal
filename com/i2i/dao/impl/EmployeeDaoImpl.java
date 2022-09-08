@@ -138,8 +138,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
         List<Trainee> trainees = new ArrayList<>(); 
 
         try (Session session = ConfigureClass.getFactory().openSession();) {
-            Criteria criteria = session.createCriteria(Trainer.class).add(Restrictions.eq("isDeleted", false));
-            trainers = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            Criteria criteria = session.createCriteria(Trainee.class).add(Restrictions.eq("isDeleted", false));
+            trainees = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
         } catch(HibernateException e) {
 
@@ -234,25 +234,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
      * @return {@link String}return status
      */
     @Override
-    public String updateTraineeDetails(int traineeId, Trainee traineeDetails) throws Exception {
+    public String updateTraineeDetails(int traineeId, Trainee trainee) throws Exception {
 
         Transaction transaction = null;
         String message = "Trainee details not updated successfully";
 
         try(Session session = ConfigureClass.getFactory().openSession();) {
             transaction = session.beginTransaction();
-            Trainee trainee = (Trainee) session.get(Trainee.class, traineeId);
-            trainee.setName(traineeDetails.getName());
-            trainee.setMail(traineeDetails.getMail());
-            trainee.setDateOfBirth(traineeDetails.getDateOfBirth());
-            trainee.setDateOfJoin(traineeDetails.getDateOfJoin());
-            trainee.setPanNumber(traineeDetails.getPanNumber());
-	    trainee.setAadharNumber(traineeDetails.getAadharNumber());
-            trainee.setMobileNumber(traineeDetails.getMobileNumber());
-            trainee.setRole(traineeDetails.getRole());
-            trainee.setAddress(traineeDetails.getAddress());
-            trainee.setPassOutYear(traineeDetails.getPassOutYear());
-            trainee.setTrainerDetails(traineeDetails.getTrainerDetails());
             session.update(trainee);
             message = "trainee Details updated Successfully";
             transaction.commit();
@@ -274,26 +262,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
      * @return {@link String}return status
      */
     @Override
-    public String updateTrainerDetails(int trainerId, Trainer trainerDetails) throws Exception {
+    public String updateTrainerDetails(int trainerId, Trainer trainer) throws Exception {
 
         Transaction transaction = null;
         String message = "Trainer details not updated successfully";
 
         try(Session session = ConfigureClass.getFactory().openSession();) {
             transaction = session.beginTransaction();
-            Trainer trainer = (Trainer) session.get(Trainer.class, trainerId);
-            trainer.setName(trainerDetails.getName());
-            trainer.setMail(trainerDetails.getMail());
-            trainer.setDateOfBirth(trainerDetails.getDateOfBirth());
-            trainer.setDateOfJoin(trainerDetails.getDateOfJoin());
-            trainer.setMobileNumber(trainerDetails.getMobileNumber());
-            trainer.setPanNumber(trainerDetails.getPanNumber());
-            trainer.setAadharNumber(trainerDetails.getAadharNumber());
-            trainer.setAddress(trainerDetails.getAddress());
-            trainer.setRole(trainerDetails.getRole());
-            trainer.setPreviousCompanyName(trainerDetails.getPreviousCompanyName());
-            trainer.setExperience(trainerDetails.getExperience());
-            trainer.setTraineeDetails(trainerDetails.getTraineeDetails());
             session.update(trainer);
             message = "Trainer Details updated Successfully";
             transaction.commit();

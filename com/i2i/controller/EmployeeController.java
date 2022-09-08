@@ -71,12 +71,12 @@ public class EmployeeController {
                     System.out.println("Choose Any One : \n 1. Trainer \n 2. Trainee");
                     int choosenValue = scanner.nextInt();
 
-                    if (choosenValue == 1 ) { 
+                    if (1 == choosenValue ) { 
                         System.out.println("*********Selecting for Adding TrainerlisT*****");
                         scanner.nextLine();
                         logger.info(employeeService.addTrainerDetails(setTrainer(scanner))); 
 
-                    } else if (choosenValue == 2) {
+                    } else if (2 == choosenValue) {
                         System.out.println("*********Selecting for Adding TrainerlisT*****");
                         scanner.nextLine();
                         logger.info(employeeService.addTraineeDetails(setTrainee(scanner)));
@@ -89,19 +89,23 @@ public class EmployeeController {
                     System.out.println("choose Any One \n 1. Trainer \n 2. Trainee");
                     int listedOne = scanner.nextInt();
 
-                    if (listedOne == 1) {
+                    if (1 == listedOne) {
                         System.out.println("******* Seleted To Update Trainer Details *********");
                         getAllTrainerDetails();
                         System.out.println("Enter The Trainer ID To Update : ");
                         int trainerId = scanner.nextInt();
-                        logger.info(employeeService.modifyTrainerDetailsById(trainerId, updateTrainer(scanner, trainerId)));
+                        Trainer trainer = updateTrainer(scanner, trainerId);
+                        logger.info((trainer != null) ? (employeeService.modifyTrainerDetailsById(trainerId, trainer))
+                                          : ("********** THERE IS NO RECORD *********"));
 
-                    } else if (listedOne == 2) {
+                    } else if (2 == listedOne) {
                         System.out.println("******* Seleted To Update Trainee Details *********");
                         getAllTraineeDetails();
                         System.out.println("Enter The Trainee ID To Update : ");
                         int traineeId = scanner.nextInt();
-                        logger.info(employeeService.modifyTraineeDetailsById(traineeId, updateTrainee(scanner, traineeId)));
+                        Trainee trainee = updateTrainee(scanner, traineeId);
+                        logger.info((trainee != null) ? (employeeService.modifyTraineeDetailsById(traineeId, trainee))
+                                          : ("********** THERE IS NO RECORD *********"));
                     
                     } else {
                         logger.error("{}",inValidData);
@@ -112,13 +116,13 @@ public class EmployeeController {
                     System.out.println("choose any one \n 1. Trainer \n 2. Trainee ");
                     int value = scanner.nextInt();
 
-                    if (value == 1) {
+                    if (1 == value) {
                         getAllTrainerDetails();
                         System.out.println("Enter The Trainer ID to Remove ");
                         int id = scanner.nextInt();
                         logger.info(employeeService.deleteTrainerDetails(id));
 
-                    } else if (value == 2) {
+                    } else if (2 == value) {
                         getAllTraineeDetails();
                         System.out.println("Enter The Trainee ID to Remove ");
                         int id = scanner.nextInt();
@@ -132,7 +136,7 @@ public class EmployeeController {
                     System.out.println("Select for Displaying the EmployeeList :\n1.trainee\n2.trainer");
                     int pickedValue = scanner.nextInt();
 
-                    if (pickedValue == 1) {
+                    if (1 == pickedValue) {
                         System.out.println("******Displaying the TraineeList *******");
                         logger.info("Enter The Employee Id to Display :");
                         int id = scanner.nextInt(); 
@@ -147,7 +151,7 @@ public class EmployeeController {
                         } else {       
                             logger.error("{}",inValidData);
 	       	        }    
-                    } else if (pickedValue == 2) {
+                    } else if (2 == pickedValue) {
                         System.out.println("****** Displaying the trinerList******** ");
                         logger.info("Enter the EmployeeId to Display :");
                         int id = scanner.nextInt();
@@ -171,10 +175,10 @@ public class EmployeeController {
                     logger.info("Select Any One \n  1. TrainerList \n  2. TraineeList ");
                     int choice = scanner.nextInt();
 
-                    if (choice == 1) {
+                    if (1 == choice) {
                         getAllTrainerDetails();
 
-                    } else if (choice == 2) {
+                    } else if (2 == choice) {
                         getAllTraineeDetails();
 
                     } else {
@@ -187,7 +191,7 @@ public class EmployeeController {
                     logger.info(" Select Any One \n 1. Trainees To Trainer \n 2. Trainers To Trainee \n 3. Retrive Details \n 4. Remove Ids ");
                     int selectedValue = scanner.nextInt();
 
-                    if (selectedValue == 1) { 
+                    if (1 == selectedValue) { 
                         getAllTrainerDetails();
                         System.out.println("Enter The Trainer Id"); 
                         int trainerId = scanner.nextInt();
@@ -195,7 +199,7 @@ public class EmployeeController {
                         trainer.setTraineeDetails(assignTrainees(scanner));
 	                logger.info(employeeService.assignTrainees(trainerId, trainer)); 
                
-                    } else if (selectedValue == 2) {
+                    } else if (2 == selectedValue) {
                         
                         getAllTraineeDetails();
                         System.out.println("Enter The Trainee Id");  
@@ -204,10 +208,11 @@ public class EmployeeController {
                         trainee.setTrainerDetails(assignTrainers(scanner));
                         logger.info(employeeService.assignTrainers(traineeId, trainee));
 
-                    } else if (selectedValue == 3) {
+                    } else if (3 == selectedValue) {
                         System.out.println("Select For Retrive Details \n 1.Trainees by TrainerId \n 2. Trainers by TraineeId ");
                         int choosedValue = scanner.nextInt();
-                        if (choosedValue == 1) {
+
+                        if (1 == choosedValue) {
                             getAllTrainerDetails();
                             System.out.println("Enter the Trainer ID :");
         	            int trainerId = scanner.nextInt();
@@ -222,7 +227,7 @@ public class EmployeeController {
                                                                                                         .append("TraineesId : " ).append( list.getId());});
                             logger.info("{}", trainers); 
                        
-                        } else if (choosedValue == 2) {
+                        } else if (2 == choosedValue) {
                             getAllTraineeDetails();
                             System.out.println("Enter the Trainee ID :");
 		            int traineeId = scanner.nextInt();
@@ -236,17 +241,17 @@ public class EmployeeController {
                                                                                     .append("TraineesId : " ).append( list.getId())); });
                         }
                
-                    } else if (selectedValue == 4) {
+                    } else if (4 == selectedValue) {
                         System.out.println("Selected to Remove ID from  \n 1. trainerIds \n 2. traineeIds");
                         int enteredValue = scanner.nextInt();
-                        if (enteredValue == 1) {
+                        if (1 == enteredValue) {
                             System.out.println("Enter The Trainer Id :"); 
-                            int trainersId = scanner.nextInt();
-                            logger.info(employeeService.removeIdFromAssignedTrainee(trainersId));
-                        } else if (enteredValue == 2) {
+                            int trainerId = scanner.nextInt();
+                            logger.info(employeeService.removeIdFromAssignedTrainee(trainerId, removeIdFromAssign(scanner, trainerId)));
+                        } else if (2 == enteredValue) {
                             System.out.println("Enter The Trainee Id :"); 
-                            int traineesId = scanner.nextInt();
-                            logger.info(employeeService.removeIdFromAssignedTrainer(traineesId));
+                            int traineeId = scanner.nextInt();
+                            logger.info(employeeService.removeIdFromAssignedTrainer(traineeId,  removeTraineeIdFromAssign(scanner, traineeId)));
                         } else {
                             logger.error("{}",inValidData);
                         }
@@ -273,6 +278,9 @@ public class EmployeeController {
         catch(NullPointerException e) {
             throw e;
         }
+        catch(Exception e) {
+            throw e;
+        }
     }
 
     /**
@@ -280,7 +288,7 @@ public class EmployeeController {
      * @param {@link Scanner}scanner object
      * @return {@link Trainer}trainer
      */
-    public static Trainer setTrainer(Scanner scanner) {
+    private static Trainer setTrainer(Scanner scanner) {
  
         Trainer trainer = new Trainer(); 
         System.out.println("Enter the Employee Name :");
@@ -394,7 +402,7 @@ public class EmployeeController {
      * @param {@link Scanner}scanner object
      * @return {@link Trainee}trainee
      */
-    public static Trainee setTrainee(Scanner scanner) {
+    private static Trainee setTrainee(Scanner scanner) {
 
         Trainee trainee = new Trainee(); 
         System.out.println("Enter the Employee Name :");
@@ -429,22 +437,21 @@ public class EmployeeController {
         while (!flag) {
 
             try {
-
-        System.out.println(" Enter The Date Of Birth in dd/mm/yyyy format ");
-        System.out.println("Enter the day(1-31) in date of Birth :");
-        int day = (scanner.nextInt());
-        System.out.println("Enter the month(1-12) in date of Birth :");
-        int month = (scanner.nextInt());
-        System.out.println("Enter the year(yyyy) in date of Birth :");
-        int year = (scanner.nextInt());
-        System.out.println("Changing the date Format :");
-        trainee.setDateOfBirth(LocalDate.of(year, month,day));
-        flag = true;
-        } catch(DateTimeException e) {
-             System.out.println(e);
-        } catch(Exception e) {
-             System.out.println(e);
-        } 
+                System.out.println(" Enter The Date Of Birth in dd/mm/yyyy format ");
+                System.out.println("Enter the day(1-31) in date of Birth :");
+                int day = (scanner.nextInt());
+                System.out.println("Enter the month(1-12) in date of Birth :");
+                int month = (scanner.nextInt());
+                System.out.println("Enter the year(yyyy) in date of Birth :");
+                int year = (scanner.nextInt());
+                System.out.println("Changing the date Format :");
+                trainee.setDateOfBirth(LocalDate.of(year, month,day));
+                flag = true;
+            } catch(DateTimeException e) {
+                System.out.println(e);
+            } catch(Exception e) {
+                System.out.println(e);
+            } 
         } 
         System.out.println("Date Of Birth : " + trainee.getDateOfBirth()); 
         System.out.println(" Enter The Aadhar Card Number :");
@@ -462,6 +469,7 @@ public class EmployeeController {
             scanner.next();
         }
         trainee.setPanNumber(scanner.next());
+        scanner.next();
         System.out.println(" Enter the Current Address : ");
         String address = scanner.nextLine();
         while (!CommonUtil.stringValidation(address)) {
@@ -503,7 +511,6 @@ public class EmployeeController {
                 int month2 = (scanner.nextInt());
                 System.out.println("Enter the year :");
                 int year2 = (scanner.nextInt());
-                System.out.println("Changing the date Format :");
                 trainee.setPassOutYear(LocalDate.of(year2, month2, day2)); 
                 flag = true;
             } catch(DateTimeException e) {
@@ -511,7 +518,8 @@ public class EmployeeController {
             } catch(Exception e) {
                 System.out.println(e);
             } 
-        } 
+        }
+        System.out.println("Changing the date Format :" + trainee.getPassOutYear()); 
         scanner.next();
         System.out.println("Enter the Role of an Employee : ");
         String role = scanner.nextLine();
@@ -530,7 +538,7 @@ public class EmployeeController {
      * @param{@noparam} 
      * @return {@link void} no returns
      */   
-    public static void getAllTrainerDetails() throws Exception {
+    private static void getAllTrainerDetails() throws Exception {
 
         try {
             List<Trainer> listOfTrainers = employeeService.showAllTrainerDetails();
@@ -559,7 +567,7 @@ public class EmployeeController {
      * @noparam  
      * @return {@link void} no returns
      */ 
-    public static void getAllTraineeDetails() throws Exception {
+    private static void getAllTraineeDetails() throws Exception {
        
         List<Trainee> listOfTrainees = employeeService.showAllTraineeDetails();
 
@@ -568,7 +576,7 @@ public class EmployeeController {
             if (CommonUtil.validateTrainees(listOfTrainees)) {
                 StringBuilder stringBuilder = new StringBuilder();
                 System.out.println(line);  
-                listOfTrainees.forEach(list -> { stringBuilder.append(" \n Employee Name : ").append( list.getName())
+                listOfTrainees.forEach(list ->{ stringBuilder.append(" \n Employee Name : ").append( list.getName())
                                                             .append(" \n EmployeeID : ").append( list.getId())
                                                             .append( " \n MobileNumber : ").append( list.getMobileNumber())
                                                             .append( " \n Role Of Employee : ").append( list.getRole())
@@ -586,7 +594,7 @@ public class EmployeeController {
      * @param {@link Scanner} scanner object 
      * @return {@link Trainer} returns trainer object
      */ 
-    public static Trainer updateTrainer(Scanner scanner, int id) throws Exception{
+    private static Trainer updateTrainer(Scanner scanner, int id) throws Exception{
 
         Trainer trainer = null;
         try {
@@ -595,66 +603,63 @@ public class EmployeeController {
             logger.error("{}",e);
         }
         if (trainer != null) {
-        logger.info("---------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------");
-        logger.info("IF THERE IS NO UPDATE  PRESS ENTER :");
-        logger.info("---------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------");
-        scanner.nextLine();
-        System.out.println("Enter the Updated Name : or Enter ");
-        String name = scanner.nextLine();
+            logger.info("---------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------");
+            logger.info("IF THERE IS NO UPDATE  PRESS ENTER :");
+            logger.info("---------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------");
+            scanner.nextLine();
+            System.out.println("Enter the Updated Name : or Enter ");
+            String name = scanner.nextLine();
 
-        if (!name.isEmpty()) { 
-            trainer.setName(name);
+            if (!name.isEmpty()) { 
+                trainer.setName(name);
+            } else {
+                logger.error("{}",noData);
+            } 
 
-        } else {
+            logger.info("Enter The Updated Mobile Number or Enter");
+            String mobileNumber = scanner.nextLine();
+
+            if (!mobileNumber.isEmpty()) {
+                long number = Long.valueOf(mobileNumber);
+	        trainer.setMobileNumber(number);
+            } else {
+                logger.error("{}",noData);
+            }
+            logger.info(" Enter The updated mail or Enter "); 
+            String mail = scanner.nextLine();
+
+            if (!mail.isEmpty()) {
+                trainer.setMail(mail);
+            } else {
+                logger.error("{}",noData);
+            }
+            logger.info(" Enter The Updated Aadhar Card Number or Enter");
+            String cardNumber = scanner.nextLine();
+
+            if (!cardNumber.isEmpty()) {
+                long aadharNumber = Long.valueOf(cardNumber);
+                trainer.setAadharNumber(aadharNumber);
+            } else {
             logger.error("{}",noData);
-        } 
+            }
 
-        logger.info("Enter The Updated Mobile Number or Enter");
-        String mobileNumber = scanner.nextLine();
+            logger.info(" Enter the Updated Pan Card number or Enter"); 
+            String panNumber = scanner.nextLine();
 
-        if (!mobileNumber.isEmpty()) {
-            long number = Long.valueOf(mobileNumber);
-	    trainer.setMobileNumber(number);
-        } else {
-            logger.error("{}",noData);
-        }
+            if (!panNumber.isEmpty()) { 
+                trainer.setPanNumber(panNumber);
+            } else {
+                logger.error("{}",noData);
+            }
+            logger.info("Enter the Role of an Employee or Enter ");
+            String role = scanner.nextLine();
 
-        logger.info(" Enter The updated mail or Enter "); 
-        String mail = scanner.nextLine();
+            if (!role.isEmpty()) {
+                trainer.setRole(role);
+            } else {
+                logger.error("{}",noData);
 
-        if (!mail.isEmpty()) {
-            trainer.setMail(mail);
-        } else {
-             logger.error("{}",noData);
-        }
-        logger.info(" Enter The Updated Aadhar Card Number or Enter");
-        String cardNumber = scanner.nextLine();
-
-        if (!cardNumber.isEmpty()) {
-            long aadharNumber = Long.valueOf(cardNumber);
-            trainer.setAadharNumber(aadharNumber);
-        } else {
-            logger.error("{}",noData);
-        }
-
-        logger.info(" Enter the Updated Pan Card number or Enter"); 
-        String panNumber = scanner.nextLine();
-
-        if (!panNumber.isEmpty()) { 
-            trainer.setPanNumber(panNumber);
-
-        } else {
-             logger.error("{}",noData);
-        }
-        logger.info("Enter the Role of an Employee or Enter ");
-        String role = scanner.nextLine();
-
-        if (!role.isEmpty()) {
-            trainer.setRole(role);
-        } else {
-             logger.error("{}",noData);
-
-        }
+            }
        
         } else {
             System.out.println("***** THERE IS NO RECORD *****");
@@ -668,7 +673,7 @@ public class EmployeeController {
      * @param {@link Scanner} scanner object
      * @return {@link Trainee} returns trainee object
      */
-    public static Trainee updateTrainee(Scanner scanner, int id) throws Exception {
+    private static Trainee updateTrainee(Scanner scanner, int id) throws Exception {
 
         Trainee trainee = null;
         try {
@@ -686,9 +691,9 @@ public class EmployeeController {
         String name = scanner.nextLine();
 
         if (!name.isEmpty()) {
-             trainee.setName(name);
+            trainee.setName(name);
         } else {
-             logger.error("{}",noData);
+            logger.error("{}",noData);
         }
 
         logger.info("Enter The Updated Mobile Number or Enter  ");
@@ -782,5 +787,36 @@ public class EmployeeController {
         }
         return list;  
     }   
-        
+     
+    private static Trainer removeIdFromAssign(Scanner scanner, int trainerId) throws Exception {
+        Trainer trainer = null;
+        try {
+        trainer = employeeService.showTrainerDetailsById(trainerId);
+        List<Trainee> list = trainer.getTraineeDetails();
+        System.out.println(list);
+        System.out.println("Enter The Trainee Id :"); 
+        int traineeId = scanner.nextInt();
+        list.remove(employeeService.showTraineeDetailsById(traineeId));
+        trainer.setTraineeDetails(list);
+        } catch(HibernateException e) {
+            throw e;
+        } 
+        return trainer;
+    }   
+
+    private static Trainee removeTraineeIdFromAssign(Scanner scanner, int traineeId) throws Exception {
+        Trainee trainee = null;
+        try {
+            trainee = employeeService.showTraineeDetailsById(traineeId);
+            List<Trainer> list = trainee.getTrainerDetails();
+            System.out.println(list);
+            System.out.println("Enter The Trainer Id :"); 
+            int trainerId = scanner.nextInt();
+            list.remove(employeeService.showTrainerDetailsById(trainerId));
+            trainee.setTrainerDetails(list);
+        } catch(HibernateException e) {
+            throw e;
+        } 
+        return trainee;
+    }   
 }

@@ -109,12 +109,12 @@ public interface EmployeeService {
      * @param {@link String }trainerid 
      * @return {@link String }return status
      */
-    public String removeIdFromAssignedTrainee(int trainersId) throws Exception;
+    public String removeIdFromAssignedTrainee(int trainerId, Trainer trainer) throws Exception;
 
     /**
      * Method used to remove trainee from trainer 
      * @param {@link String}traineeid 
      * @return {@link String }return status
      */   
-    public String removeIdFromAssignedTrainer(int traineesId) throws Exception;
+    public String removeIdFromAssignedTrainer(int traineeId, Trainee trainee) throws Exception;
 }

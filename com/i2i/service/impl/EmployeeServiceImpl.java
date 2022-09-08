@@ -159,9 +159,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link String }return status
      */
     @Override
-    public String removeIdFromAssignedTrainee(int trainersId) throws Exception {
+    public String removeIdFromAssignedTrainee(int trainerId, Trainer trainer) throws Exception {
         
-	return employeeDao.removeTrainerDetails(trainersId); 
+	return employeeDao.updateTrainerDetails(trainerId, trainer); 
     }
  
     /**
@@ -170,9 +170,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link String }return status
      */
     @Override   
-    public String removeIdFromAssignedTrainer(int traineesId) throws Exception {
+    public String removeIdFromAssignedTrainer(int traineeId, Trainee trainee) throws Exception {
 
-	return employeeDao.removeTraineeDetails(traineesId); 
+	return employeeDao.updateTraineeDetails(traineeId, trainee); 
     }                  
   
 }
