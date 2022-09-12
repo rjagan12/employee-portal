@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "trainees")
 public class Trainee extends Employee {
-
+'
     @Column(name = "year_of_passing")
     private LocalDate passOutYear;
 
